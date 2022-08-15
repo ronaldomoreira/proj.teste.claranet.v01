@@ -1,5 +1,8 @@
+using BusinessSevice;
+using DomainApp.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Repository;
 using Repository.Context;
 
 namespace web_app.teste.claranet
@@ -25,9 +28,21 @@ namespace web_app.teste.claranet
 
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-            builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<IdentityAppDbContext>();
+            builder.Services.AddDefaultIdentity<IdentityUser>((IdentityOptions options) =>
+            {
+                options.SignIn.RequireConfirmedAccount = false;
+                options.Password.RequireDigit = false;
+                options.Password.RequiredLength = 6;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+            }).AddEntityFrameworkStores<IdentityAppDbContext>();
+            
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddScoped<IBusinessServiceCadastro, BusinessServiceCadastro>();
+            builder.Services.AddScoped<IRepositoryCadastro, RepositoryCadastro>();
+
 
             var app = builder.Build();
 

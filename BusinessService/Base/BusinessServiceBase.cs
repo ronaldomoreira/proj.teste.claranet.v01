@@ -11,12 +11,10 @@ namespace BusinessService.Base
 {
     public class BusinessServiceBase<TEntity> : IBusinessServiceBase<TEntity> where TEntity : class
     {
-        private readonly AppMainDbContext _context;
         private readonly IRepositoryBaseReadWrite<TEntity> _repository;
 
-        public BusinessServiceBase(AppMainDbContext context, IRepositoryBaseReadWrite<TEntity> repository)
+        public BusinessServiceBase(IRepositoryBaseReadWrite<TEntity> repository)
         {
-            this._context = context;
             _repository = repository;
         }
 

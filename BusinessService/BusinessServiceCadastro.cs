@@ -20,7 +20,7 @@ namespace BusinessSevice
             return ((difAnos >= 0) && (difAnos <= 1));
         }
 
-        public BusinessServiceCadastro(AppMainDbContext context, IRepositoryCadastro repositoryCadastro) : base(context, repositoryCadastro)
+        public BusinessServiceCadastro(IRepositoryCadastro repositoryCadastro) : base(repositoryCadastro)
         {
             _repositoryCadastro = repositoryCadastro;
         }
