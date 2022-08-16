@@ -26,6 +26,6 @@ body {
     background-size: 100px 82px;
 }
 
-table tbody tr td {
-    font-size: 14px;
+#tbl-cadastro tbody tr td {
+    font-size: 12px;
 }
