@@ -29,3 +29,9 @@ body {
 #tbl-cadastro tbody tr td {
     font-size: 12px;
 }
+
+.btn-text-xl {
+    font-family: "Arial Bold", Gadget, sans-serif;
+    font-style: normal;
+    font-size: 10px !important;
+}
