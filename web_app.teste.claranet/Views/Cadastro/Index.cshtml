@@ -33,7 +33,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.NomeContato)
             </th>
-            <th class="no-sort"></th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -78,9 +78,16 @@
                     @Html.DisplayFor(modelItem => item.NomeContato)
                 </td>
                 <td>
-                    <a class="btn btn-secondary btn-sm btn-text-xl" asp-action="Edit" asp-route-id="@item.Id" data-toggle="tooltip" title="Editar cadastro">Edit</a> |
-                    <a class="btn btn-info btn-sm btn-text-xl" asp-action="Details" asp-route-id="@item.Id" data-toggle="tooltip" title="Mostrar detalhes">Details</a> |
-                    <a class="btn btn-danger btn-sm btn-text-xl" asp-action="Delete" asp-route-id="@item.Id" data-toggle="tooltip" title="Excluir cadastro">Delete</a>
+                    <div class="btn-group btn-group-sm" role="group">
+                        <button id="btn-group-drop-cadastro-acoes" type="button" class="btn btn-link btn-group-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            Ações
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="btn-group-drop-cadastro-acoes">
+                            <li><a class="dropdown-item" asp-action="Edit" asp-route-id="@item.Id" data-toggle="tooltip" title="Editar cadastro">Edit</a></li>
+                            <li><a class="dropdown-item" asp-action="Details" asp-route-id="@item.Id" data-toggle="tooltip" title="Mostrar detalhes">Details</a></li>
+                            <li><a class="dropdown-item" asp-action="Delete" asp-route-id="@item.Id" data-toggle="tooltip" title="Excluir cadastro">Delete</a></li>
+                        </ul>
+                    </div>
                 </td>
             </tr>
         }
@@ -113,11 +120,10 @@
                 order: [[1, 'asc']],
                 dom: 'Bfrtip',
                 buttons: [
-                     { extend: 'pdf', className: 'btn btn-light btn-sm btn-text-xl' },
-                     { extend: 'excel', className: 'btn btn-light btn-sm btn-text-xl' },
-                     { extend: 'print', className: 'btn btn-light btn-sm btn-text-xl' }
+                    { extend: 'pdf', className: 'btn btn-light btn-sm', orientation: 'landscape', exportOptions: { columns: [0, 1, 2, 3, 4, 5, 6, 7] } },
+                    { extend: 'excel', className: 'btn btn-light btn-sm', orientation: 'landscape', exportOptions: { columns: [0, 1, 2, 3, 4, 5, 6, 7] } },
+                    { extend: 'print', className: 'btn btn-light btn-sm', orientation: 'landscape', exportOptions: { columns: [0, 1, 2, 3, 4, 5, 6, 7] } }
                 ],
-                select: true,
                 "language": {
                     "emptyTable": "Nenhum registro encontrado",
                     "info": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
