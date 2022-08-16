@@ -118,11 +118,11 @@
                     { orderable: false, targets: 8 }
                 ],
                 order: [[1, 'asc']],
-                dom: 'Bfrtip',
+                dom: 'fBrtip<"clear">l',
                 buttons: [
-                    { extend: 'pdf', className: 'btn btn-light btn-sm', orientation: 'landscape', exportOptions: { columns: [0, 1, 2, 3, 4, 5, 6, 7] } },
-                    { extend: 'excel', className: 'btn btn-light btn-sm', orientation: 'landscape', exportOptions: { columns: [0, 1, 2, 3, 4, 5, 6, 7] } },
-                    { extend: 'print', className: 'btn btn-light btn-sm', orientation: 'landscape', exportOptions: { columns: [0, 1, 2, 3, 4, 5, 6, 7] } }
+                    { extend: 'pdf',   text: '<i class="fa-solid fa-file-pdf"></i>', titleAttr: 'Exportar para PDF', className: 'btn btn-light btn-sm', orientation: 'landscape', exportOptions: { columns: [0, 1, 2, 3, 4, 5, 6, 7] } },
+                    { extend: 'excel', text: '<i class="fa-solid fa-file-excel"></i>', titleAttr: 'Exportara para excel', className: 'btn btn-light btn-sm', orientation: 'landscape', exportOptions: { columns: [0, 1, 2, 3, 4, 5, 6, 7] } },
+                    { extend: 'print', text: '<i class="fa-solid fa-print"></i>', titleAttr: 'Imprimir', className: 'btn btn-light btn-sm', orientation: 'landscape', exportOptions: { columns: [0, 1, 2, 3, 4, 5, 6, 7] } }
                 ],
                 "language": {
                     "emptyTable": "Nenhum registro encontrado",
