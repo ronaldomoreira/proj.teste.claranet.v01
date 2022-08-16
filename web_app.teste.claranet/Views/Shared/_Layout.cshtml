@@ -2,14 +2,21 @@
 <html lang="pt-br">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Language" content="pt-br">
+    <meta name="description" content="Teste claranet - Ronaldo Moreira">
+    <meta name="author" content="Ronaldo Moreira">
+    <meta name="keywords" content="">
+    <meta name="reply-to" content="ronaldo.poa.rs@gmail.com">
+    <meta name="generator" content="Microsoft Visual Studio 2022">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>@ViewData["Title"] - web_app.teste.claranet</title>
+
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/web_app.teste.claranet.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" asp-append-version="true" />
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css" />
-    <link rel="stylesheet" href="https://cdn.datatables.net/select/1.4.0/css/select.bootstrap5.min.css" />
+       <!-- css especific -->
+    @await RenderSectionAsync("styles_especific", required: false)
 </head>
 <body>
     <header>

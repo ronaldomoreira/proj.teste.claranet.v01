@@ -2,7 +2,24 @@
 @{
     ViewData["Title"] = "Index";
 }
-<h1>Index</h1>
+
+@section styles_especific {
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/select/1.4.0/css/select.bootstrap5.min.css" />
+    <style>
+        /* coloque aqui seu codigo css */
+        #tbl-cadastro tbody tr td {
+            font-size: 14px;
+        }
+
+        #tbl-cadastro {
+            table-layout: auto;
+            width: 100%;
+        }
+    </style>
+}
+
+<h3>Index</h3>
 <p>
     <a class="btn btn-lg btn-primary" asp-area="" asp-controller="Cadastro" asp-action="Create"><i class="fa-solid fa-square-plus"></i> Novo cadastro</a>
 </p>
@@ -120,7 +137,7 @@
                 order: [[1, 'asc']],
                 dom: 'fBrtip<"clear">l',
                 buttons: [
-                    { extend: 'pdf',   text: '<i class="fa-solid fa-file-pdf"></i>', titleAttr: 'Exportar para PDF', className: 'btn btn-light btn-sm', orientation: 'landscape', exportOptions: { columns: [0, 1, 2, 3, 4, 5, 6, 7] } },
+                    { extend: 'pdf', text: '<i class="fa-solid fa-file-pdf"></i>', titleAttr: 'Exportar para PDF', className: 'btn btn-light btn-sm', orientation: 'landscape', exportOptions: { columns: [0, 1, 2, 3, 4, 5, 6, 7] } },
                     { extend: 'excel', text: '<i class="fa-solid fa-file-excel"></i>', titleAttr: 'Exportara para excel', className: 'btn btn-light btn-sm', orientation: 'landscape', exportOptions: { columns: [0, 1, 2, 3, 4, 5, 6, 7] } },
                     { extend: 'print', text: '<i class="fa-solid fa-print"></i>', titleAttr: 'Imprimir', className: 'btn btn-light btn-sm', orientation: 'landscape', exportOptions: { columns: [0, 1, 2, 3, 4, 5, 6, 7] } }
                 ],

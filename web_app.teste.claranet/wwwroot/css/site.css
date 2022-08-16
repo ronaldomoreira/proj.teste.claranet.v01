@@ -26,10 +26,6 @@ body {
     background-size: 100px 82px;
 }
 
-#tbl-cadastro tbody tr td {
-    font-size: 12px;
-}
-
 .btn-text-xl {
     font-family: "Arial Bold", Gadget, sans-serif;
     font-style: normal;
