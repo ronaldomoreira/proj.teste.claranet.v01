@@ -41,9 +41,12 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Cnpj)
-                    @Html.DisplayFor(modelItem => item.RazaoSocial)
-
+                    <div class="">
+                        @Html.DisplayFor(modelItem => item.Cnpj)
+                    </div>
+                    <div class="">
+                        @Html.DisplayFor(modelItem => item.RazaoSocial)
+                    </div>
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.NomeFantasia)
@@ -52,13 +55,13 @@
                     @Html.DisplayFor(modelItem => item.Email)
                 </td>
                 <td>
-                    <div class="row">
+                    <div class="">
                         Tel.: @Html.DisplayFor(modelItem => item.Telefone)
                     </div>
-                    <div class="row">
+                    <div class="">
                         Com.: @Html.DisplayFor(modelItem => item.TelefoneComercial)
                     </div>
-                    <div class="row">
+                    <div class="">
                         Cel.: @Html.DisplayFor(modelItem => item.Celular)
                     </div>
                 </td>

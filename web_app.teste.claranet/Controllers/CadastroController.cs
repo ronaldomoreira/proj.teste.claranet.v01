@@ -20,6 +20,16 @@ namespace web_app.teste.claranet.Controllers
         private MapperConfiguration mapperConfiguration;
         private IMapper mapper;
 
+        private string SomenteNumeros(string str)
+        {
+            int i;
+            string rt = "";
+            for (i = 0; i < str.Length; i++)
+                if (Char.IsDigit(str[i]))
+                    rt += str[i];
+            return rt;
+        }
+
         private List<Estado> ListaEstados()
         {
             List<Estado> listaEstados = new List<Estado>()
@@ -72,6 +82,12 @@ namespace web_app.teste.claranet.Controllers
             {
                 var cad = await _businessServiceCadastro.GetAll();
                 listCadastro = mapper.Map<List<Cadastro>, List<CadastroViewModel>>(cad.ToList());
+
+                foreach (var item in listCadastro) 
+                {
+                    long valor;
+                    item.Cnpj = (Int64.TryParse(item.Cnpj, out valor))? String.Format(@"{0:00\.000\.000\/0000\-00}", valor): "";
+                }
             }
 
             return _businessServiceCadastro != null ? 
@@ -122,6 +138,7 @@ namespace web_app.teste.claranet.Controllers
             if (ModelState.IsValid)
             {
                 cadastro = mapper.Map<CadastroViewModel, Cadastro>(cadastroViewModel);
+                cadastro.Cnpj = SomenteNumeros(cadastro.Cnpj);
                 await _businessServiceCadastro.Add(cadastro);
                 await _businessServiceCadastro.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -171,7 +188,7 @@ namespace web_app.teste.claranet.Controllers
                 try
                 {
                     cadastro = mapper.Map<CadastroViewModel, Cadastro>(cadastroViewModel);
-
+                    cadastro.Cnpj = SomenteNumeros(cadastro.Cnpj);
                     _businessServiceCadastro.Update(cadastro);
                     await _businessServiceCadastro.SaveChangesAsync();
                 }

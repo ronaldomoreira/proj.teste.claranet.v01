@@ -11,7 +11,7 @@
             <div class="col-4">
                 <div class="form-group">
                     <label asp-for="Cnpj" class="control-label"></label>
-                    <input asp-for="Cnpj" class="form-control" />
+                    <input asp-for="Cnpj" class="cnpj form-control" />
                     <span asp-validation-for="Cnpj" class="text-danger"></span>
                 </div>
             </div>
@@ -43,14 +43,14 @@
             <div class="col-4">
                 <div class="form-group">
                     <label asp-for="Telefone" class="control-label"></label>
-                    <input asp-for="Telefone" class="form-control" />
+                    <input asp-for="Telefone" class="telefone form-control" />
                     <span asp-validation-for="Telefone" class="text-danger"></span>
                 </div>
             </div>
             <div class="col-4">
                 <div class="form-group">
                     <label asp-for="TelefoneComercial" class="control-label"></label>
-                    <input asp-for="TelefoneComercial" class="form-control" />
+                    <input asp-for="TelefoneComercial" class="telefone form-control" />
                     <span asp-validation-for="TelefoneComercial" class="text-danger"></span>
                 </div>
             </div>
@@ -142,6 +142,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
     <script>
         $(document).ready(function() {
+
+            $('input.cnpj').mask('99.999.999/9999-99', {reverse: true});
+
             $("input.telefone").focusout(function() {
                 var phone, element;
                 element = $(this);
@@ -153,6 +156,7 @@
                     element.mask("(99) 9999-99999");
                 }
             }).trigger('focusout');
+
         });
     </script>
 }
