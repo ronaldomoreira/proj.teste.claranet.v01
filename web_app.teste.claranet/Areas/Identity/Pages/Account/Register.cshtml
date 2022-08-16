@@ -9,23 +9,32 @@
 <div class="row">
     <div class="col-md-4">
         <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-            <h2>Novo usuário</h2>
+            <h3>Novo usuário</h3>
             <hr />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-floating">
-                <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" />
-                <label asp-for="Input.Email"></label>
+            <div class="row">
+                <label asp-for="Input.Email" class="form-label"></label>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="register-addon-email"><i class="fa-solid fa-envelope"></i></span>
+                    <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-describedby="register-addon-email" aria-required="true" placeholder="Email" />
+                </div>
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
-            <div class="form-floating">
-                <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" />
-                <label asp-for="Input.Password"></label>
+            <div class="row">
+                <label asp-for="Input.Password" class="form-label"></label>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="register-addon-passwd"><i class="fa-solid fa-key"></i></span>
+                    <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-describedby="register-addon-passwd" aria-required="true" />
+                </div>
                 <span asp-validation-for="Input.Password" class="text-danger"></span>
             </div>
-            <div class="form-floating">
-                <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" />
-                <label asp-for="Input.ConfirmPassword"></label>
-                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+            <div class="row">
+                <label asp-for="Input.ConfirmPassword" class="form-label"></label>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="register-addon-confirm-passwd"><i class="fa-solid fa-key"></i></span>
+                    <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-describedby="register-addon-confirm-passwd" aria-required="true" />
+                </div>
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
             <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Registrar</button>
         </form>

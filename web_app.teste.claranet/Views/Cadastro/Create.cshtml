@@ -5,7 +5,7 @@
 <h2>Novo Cadastro</h2>
 <hr />
 <div class="container-md">
-    <form asp-action="Create" class="needs-validation" novalidate>
+    <form asp-action="Create" novalidate>
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="row">
             <div class="col-4">
@@ -140,9 +140,7 @@
     }
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
-
     <script>
-
         $(document).ready(function() {
             $("input.telefone").focusout(function() {
                 var phone, element;
@@ -156,7 +154,5 @@
                 }
             }).trigger('focusout');
         });
-
     </script>
-
 }

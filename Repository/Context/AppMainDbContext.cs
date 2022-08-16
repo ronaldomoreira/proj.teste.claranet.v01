@@ -14,6 +14,12 @@ namespace Repository.Context
                  : base(options)
         {
             //
+            
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            base.OnConfiguring(optionsBuilder);
         }
 
         public DbSet<Cadastro> dbCadastro { get; set; }

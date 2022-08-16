@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using DomainApp.Entities;
 using DomainApp.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -12,12 +13,43 @@ using web_app.teste.claranet.Models;
 
 namespace web_app.teste.claranet.Controllers
 {
+    [Authorize]
     public class CadastroController : Controller
     {
         private readonly IBusinessServiceCadastro _businessServiceCadastro;
         private MapperConfiguration mapperConfiguration;
         private IMapper mapper;
 
+        private List<Estado> ListaEstados()
+        {
+            List<Estado> listaEstados = new List<Estado>()
+            {
+                new Estado(){ Sigla="AL", Descricao="Alagoas"},
+                new Estado(){ Sigla="BA", Descricao="Bahia"},
+                new Estado(){ Sigla="CE", Descricao="Ceará"},
+                new Estado(){ Sigla="DF", Descricao="Distrito Federal"},
+                new Estado(){ Sigla="ES", Descricao="Espirito Santo"},
+                new Estado(){ Sigla="GO", Descricao="Goiás"},
+                new Estado(){ Sigla="MG", Descricao="Minas Gerais"},
+                new Estado(){ Sigla="PR", Descricao="Paraná"},
+                new Estado(){ Sigla="RS", Descricao="Rio Grande do Sul"},
+                new Estado(){ Sigla="SP", Descricao="São Paulo"},
+                new Estado(){ Sigla="TO", Descricao="Tocantins"}
+            };
+
+            return listaEstados;
+        }
+
+        private List<SelectListItem> SelectListEstados()
+        {
+            List<SelectListItem> dropdownEstados = new List<SelectListItem>();
+            foreach (var item in ListaEstados())
+            {
+                dropdownEstados.Add(new SelectListItem { Value = item.Sigla, Text = item.Descricao });
+            }
+
+            return dropdownEstados;
+        }
         public CadastroController(IBusinessServiceCadastro businessServiceCadastro)
         {
             _businessServiceCadastro = businessServiceCadastro;
@@ -65,35 +97,16 @@ namespace web_app.teste.claranet.Controllers
                 return NotFound();
             }
 
-            var entity = Mapper.Map<Cadastro, CadastroViewModel>(cadastro, cadastroViewModel);
+            cadastroViewModel = mapper.Map<Cadastro, CadastroViewModel>(cadastro);
 
-            return View(entity);
+            return View(cadastroViewModel);
         }
 
         // GET: Cadastro/Create
         public IActionResult Create()
         {
-            var listaEstados = new List<Estado>()
-            {
-                new Estado(){ Sigla="AL", Descricao="Alagoas"},
-                new Estado(){ Sigla="BA", Descricao="Bahia"},
-                new Estado(){ Sigla="CE", Descricao="Ceará"},
-                new Estado(){ Sigla="DF", Descricao="Distrito Federal"},
-                new Estado(){ Sigla="ES", Descricao="Espirito Santo"},
-                new Estado(){ Sigla="GO", Descricao="Goiás"},
-                new Estado(){ Sigla="MG", Descricao="Minas Gerais"},
-                new Estado(){ Sigla="PR", Descricao="Paraná"},
-                new Estado(){ Sigla="RS", Descricao="Rio Grande do Sul"},
-                new Estado(){ Sigla="SP", Descricao="São Paulo"},
-                new Estado(){ Sigla="TO", Descricao="Tocantins"}
-            };
-            List<SelectListItem> dropdownEstados = new List<SelectListItem>();
-            foreach (var item in listaEstados)
-            {
-                dropdownEstados.Add(new SelectListItem { Value = item.Sigla, Text = item.Descricao });
-            }
 
-            ViewBag.Estados = dropdownEstados;
+            ViewBag.Estados = SelectListEstados();
             return View();
         }
 
@@ -104,12 +117,12 @@ namespace web_app.teste.claranet.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Cnpj,RazaoSocial,NomeFantasia,Email,Telefone,TelefoneComercial,Celular,Logradouro,Num,Complemento,Bairro,Cidade,Estado,Cep,NomeContato")] CadastroViewModel cadastroViewModel)
         {
-            Cadastro cad = new Cadastro();
+            Cadastro cadastro = new Cadastro();
 
             if (ModelState.IsValid)
             {
-                cad = Mapper.Map<CadastroViewModel, Cadastro>(cadastroViewModel);
-                await _businessServiceCadastro.Add(cad);
+                cadastro = mapper.Map<CadastroViewModel, Cadastro>(cadastroViewModel);
+                await _businessServiceCadastro.Add(cadastro);
                 await _businessServiceCadastro.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -120,6 +133,8 @@ namespace web_app.teste.claranet.Controllers
         // GET: Cadastro/Edit/5
         public async Task<IActionResult> Edit(long? id)
         {
+            CadastroViewModel cadastroViewModel = new CadastroViewModel();
+
             if (id == null || _businessServiceCadastro == null)
             {
                 return NotFound();
@@ -130,7 +145,11 @@ namespace web_app.teste.claranet.Controllers
             {
                 return NotFound();
             }
-            return View(cadastro);
+
+            cadastroViewModel = mapper.Map<Cadastro, CadastroViewModel>(cadastro);
+
+            ViewBag.Estados = SelectListEstados();
+            return View(cadastroViewModel);
         }
 
         // POST: Cadastro/Edit/5
@@ -138,9 +157,11 @@ namespace web_app.teste.claranet.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("Id,Cnpj,RazaoSocial,NomeFantasia,Email,Telefone,TelefoneComercial,Celular,Logradouro,Num,Complemento,Bairro,Cidade,Estado,Cep,NomeContato")] CadastroViewModel cadastro)
+        public async Task<IActionResult> Edit(long id, [Bind("Id,Cnpj,RazaoSocial,NomeFantasia,Email,Telefone,TelefoneComercial,Celular,Logradouro,Num,Complemento,Bairro,Cidade,Estado,Cep,NomeContato")] CadastroViewModel cadastroViewModel)
         {
-            if (id != cadastro.Id)
+            Cadastro cadastro = new Cadastro();
+
+            if (id != cadastroViewModel.Id)
             {
                 return NotFound();
             }
@@ -149,7 +170,9 @@ namespace web_app.teste.claranet.Controllers
             {
                 try
                 {
-                    //_businessServiceCadastro.Update(cadastro);
+                    cadastro = mapper.Map<CadastroViewModel, Cadastro>(cadastroViewModel);
+
+                    _businessServiceCadastro.Update(cadastro);
                     await _businessServiceCadastro.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -167,25 +190,28 @@ namespace web_app.teste.claranet.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(cadastro);
+            return View(cadastroViewModel);
         }
 
         // GET: Cadastro/Delete/5
         public async Task<IActionResult> Delete(long? id)
         {
+            CadastroViewModel cadastroViewModel = new CadastroViewModel();
+
             if (id == null || _businessServiceCadastro == null)
             {
                 return NotFound();
             }
+            var cadastro = await _businessServiceCadastro.GetById(id);
 
-            //var cadastro = await _context.Cadastro
-            //    .FirstOrDefaultAsync(m => m.Id == id);
-            //if (cadastro == null)
-            //{
-            //    return NotFound();
-            //}
+            if (cadastro == null)
+            {
+                return NotFound();
+            }
 
-            return View();
+            cadastroViewModel = mapper.Map<Cadastro, CadastroViewModel>(cadastro);
+
+            return View(cadastroViewModel);
         }
 
         // POST: Cadastro/Delete/5

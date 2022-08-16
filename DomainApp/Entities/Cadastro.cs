@@ -14,8 +14,21 @@ namespace DomainApp.Entities
     {
         public Cadastro()
         {
+            Cnpj = String.Empty;
             RazaoSocial = String.Empty;
             NomeFantasia = String.Empty;
+            Email = String.Empty;
+            Telefone = String.Empty;
+            TelefoneComercial = String.Empty;
+            Celular = String.Empty;
+            Logradouro = String.Empty;
+            Num = String.Empty;
+            Complemento = String.Empty;
+            Bairro = String.Empty;
+            Cidade = String.Empty;
+            Estado = String.Empty;
+            Cep = String.Empty;
+            NomeContato = String.Empty;
         }
 
         [Key]
@@ -39,36 +52,36 @@ namespace DomainApp.Entities
         public string Email { get; set; }
 
         [Column(TypeName = "varchar(20)")]
-        public string Telefone { get; set; }
+        public string? Telefone { get; set; }
 
         [Column(TypeName = "varchar(20)")]
-        public string TelefoneComercial { get; set; }
+        public string? TelefoneComercial { get; set; }
 
         [Column(TypeName = "varchar(20)")]
-        public string Celular { get; set; }
+        public string? Celular { get; set; }
 
         [Column(TypeName = "varchar(100)")]
-        public string Logradouro { get; set; }
+        public string? Logradouro { get; set; }
 
         [Column(TypeName = "varchar(10)")]
-        public string Num { get; set; }
+        public string? Num { get; set; }
 
         [Column(TypeName = "varchar(20)")]
-        public string Complemento { get; set; }
+        public string? Complemento { get; set; }
 
         [Column(TypeName = "varchar(50)")]
-        public string Bairro { get; set; }
+        public string? Bairro { get; set; }
 
         [Column(TypeName = "varchar(50)")]
-        public string Cidade { get; set; }
+        public string? Cidade { get; set; }
 
         [Column(TypeName = "varchar(50)")]
-        public string Estado { get; set; }
+        public string? Estado { get; set; }
 
         [Column(TypeName = "varchar(10)")]
-        public string Cep { get; set; }
+        public string? Cep { get; set; }
 
         [Column(TypeName = "varchar(50)")]
-        public string NomeContato { get; set; }
+        public string? NomeContato { get; set; }
     }
 }

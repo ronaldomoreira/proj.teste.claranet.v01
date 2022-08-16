@@ -12,9 +12,7 @@ namespace DomainApp.Entities
         {
             Sigla = String.Empty;
             Descricao = String.Empty;
-            
         }
-
         public string Sigla { get; set; }
         public string Descricao { get; set; }
     }

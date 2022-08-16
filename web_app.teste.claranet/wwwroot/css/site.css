@@ -25,3 +25,7 @@ body {
     background: url(kiwi.svg);
     background-size: 100px 82px;
 }
+
+table tbody tr td {
+    font-size: 14px;
+}
