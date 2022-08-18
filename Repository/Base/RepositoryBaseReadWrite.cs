@@ -100,11 +100,7 @@ namespace Repository.Base
         {
             if (item != null)
             {
-                var itemTmp = await _dbSet.FindAsync(item);
-                if (itemTmp != null)
-                {
-                    _dbSet.Remove(itemTmp);
-                }
+                _dbSet.Remove(item);
             }
         }
 
